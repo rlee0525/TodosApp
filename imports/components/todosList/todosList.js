@@ -9,9 +9,22 @@ class TodosListCtrl {
 
     this.helpers({
       tasks() {
-        return Tasks.find({});
+        return Tasks.find({}, {
+          sort: {
+            createdAt: -1
+          }
+        });
       }
     })
+  }
+
+  addTask(newTask) {
+    Tasks.insert({
+      text: newTask,
+      createdAt: new Date
+    });
+
+    this.newTask = '';
   }
 }
 
